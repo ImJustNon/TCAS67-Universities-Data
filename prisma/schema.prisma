@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = "file:./database.db"
+}
+
+model Universities {
+    id                 				String  	@unique
+    university_id      				String  	@unique
+    university_type    				String
+    university_name    				String
+    university_name_en 				String
+    is_accepted_round1 				Boolean
+    is_accepted_round2 				Boolean
+    is_accepted_round3 				Boolean
+    is_accepted_round4 				Boolean
+    file_path_1        				String?
+    file_path_2        				String?
+    file_path_3        				String?
+    file_path_4        				String?
+    file_path_handicap 				String?
+	created_at						DateTime 	@default(now())
+	updated_at						DateTime	@updatedAt
+}
+
+model Courses {
+	id 								String		@unique
+	university_type_id				String	
+	university_type_name_th			String
+	university_id					String
+	university_name_th				String
+	university_name_en				String
+	campus_id						String
+	campus_name_th					String
+	campus_name_en					String
+	faculty_id						String
+	faculty_name_th					String
+	faculty_name_en					String
+	group_field_id					String
+	group_field_th					String
+	field_id						String
+	field_name_th					String
+	field_name_en					String
+	program_running_number			String
+	program_name_th					String
+	program_name_en					String
+	program_type_id					String
+	program_type_name_th			String
+	program_id						String		
+	number_acceptance_mko2			Int?
+	program_partners_id				String
+	program_partners_inter_name		String
+	country_partners_name			String
+	major_id						String?
+	major_name_th					String?
+	major_name_en					String?
+	major_acceptance_number			Int?
+	cost							String
+	graduate_rate					String?
+	employment_rate					String?
+	median_salary					String?
+	all_types						String?	
+	created_at						DateTime 	@default(now())
+	updated_at						DateTime	@updatedAt
+}
+
+model Rounds {
+	id								String		@unique
+	university_id					String
+	program_id						String
+	project_id						String?
+	project_name_th					String?
+	type							String
+	receive_student_number			Int?
+	only_formal						Int
+	only_international				Int
+	only_vocational					Int
+	only_non_formal					Int
+	only_ged						Int
+	description						String?
+	condition						String?
+	interview_location				String?
+	interview_date					String?
+	interview_time					String?
+	link							String?
+	grad_current					Boolean
+	t_score							Boolean
+	min_total_score					Int?
+	scores							String?   //Json
+	score_conditions				String?   //Json
+	min_gpax						Float?
+	major_id						String?
+	join_id							String?
+	min_credit_gpa22_23				Int?
+	created_at						DateTime	@default(now())
+	updated_at						DateTime	@updatedAt
+}
+
+
+model LyProgramsEST {
+	id								Int			@id @default(autoincrement())
+	program_id						String		
+	project_id						String
+	major_id						String
+	program_name_th					String
+	program_type_name_th			String
+	major_name_th					String
+	project_name_th					String
+	min_score						Float
+	max_score						Float
+	min_score_ds					Float
+	max_score_ds					Float
+	est_min_score_mean				Float?
+	est_min_score_mean_sd			Float?
+	est_min_score_regression		Float?
+	receive_student_number			Int?
+	scores							String		//json
+	created_at						DateTime	@default(now())
+	updated_at						DateTime	@updatedAt
+}
